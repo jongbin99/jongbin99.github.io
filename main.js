@@ -307,7 +307,14 @@
   const wrap = video && video.parentElement;
   if (video) {
     // Plays on load (the tag carries autoplay); only held back for prefers-reduced-motion.
-    if (REDUCED) video.pause(); else video.play().catch(() => {});
+    // Some browsers refuse autoplay (e.g. Safari in Low Power Mode); start on the first tap, click or key press instead.
+    const start = () => video.play().catch(() => {});
+    if (REDUCED) video.pause();
+    else {
+      start();
+      const kick = () => { if (video.paused) start(); };
+      ['pointerdown', 'touchend', 'keydown'].forEach((ev) => window.addEventListener(ev, kick, { passive: true }));
+    }
     // Servers without byte-range support can't seek, so the native loop may stall; restart by hand.
     video.addEventListener('ended', () => { if (!REDUCED) { video.load(); video.play().catch(() => {}); } });
 
