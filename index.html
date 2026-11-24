@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jongbin Kim</title>
+  <meta name="description" content="Jongbin Kim — PhD candidate at UCSF working on molecular docking, computational chemistry, and AI drug discovery.">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Inter stands in for PP Neue Montreal (see design.md). Drop licensed PPNeueMontreal files in and it takes over. -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <!-- Background: ViewDock pose scan rendered from ChimeraX (see tools/render_poses.py) -->
+  <div class="bg-video" aria-hidden="true">
+    <video id="bg-video" muted loop playsinline preload="auto" poster="assets/poses.jpg">
+      <source src="assets/poses.mp4" type="video/mp4">
+    </video>
+  </div>
+  <canvas id="ambient" class="ambient" aria-hidden="true"></canvas>
+
+  <header class="nav container">
+    <a class="logo" href="#top" aria-label="Jongbin Kim — home">
+      <svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8052ff"/>
+            <stop offset="1" stop-color="#15846e"/>
+          </linearGradient>
+        </defs>
+        <path d="M3 24 L13 3 L17 14 Z" fill="#8052ff"/>
+        <path d="M13 3 L25 21 L17 14 Z" fill="url(#lg)"/>
+        <path d="M3 24 L17 14 L25 21 Z" fill="#8052ff" opacity=".55"/>
+      </svg>
+      <span>Jongbin Kim</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#research">Research</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn" href="#contact">Get in touch</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO — text left, constellation right -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="display">Jongbin<br>Kim</h1>
+          <p class="label">PhD Candidate · Shoichet Lab · UCSF</p>
+          <p class="body">
+            I work on molecular docking, computational chemistry, and AI drug
+            discovery: better ways to pick the right molecules out of
+            billion-compound virtual screens.
+          </p>
+          <a class="link-amber" href="#research">See the research <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="container pose-readout">
+        <p class="caption">
+          <span class="pose-count"><span id="pose-idx">001</span> / <span id="pose-total">028</span></span>
+          <span class="pose-note">alpha2a agonists</span>
+        </p>
+        <button id="bg-toggle" class="ghost" type="button" aria-pressed="false">Pause</button>
+      </div>
+    </section>
+
+    <!-- RESEARCH — visual left, text right -->
+    <section id="research" class="section">
+      <div class="container split split--visual-left">
+        <div class="visual reveal">
+          <canvas class="field" data-shape="helix" aria-hidden="true"></canvas>
+        </div>
+        <div class="copy">
+          <p class="label reveal">Research</p>
+          <h2 class="heading-lg reveal">What I'm working on.</h2>
+          <ol class="themes">
+            <li class="reveal">
+              <span class="index">01</span>
+              <div>
+                <h3 class="heading-2xs">Sharper scoring for billion-scale docking</h3>
+                <p class="body muted">Bringing ligand–water van der Waals interactions and a physics-informed neural network model (AIMNet-x2D) into the UCSF DOCK scoring function, to improve hit prioritization in billion-scale virtual screens.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="index">02</span>
+              <div>
+                <h3 class="heading-2xs">Docking without the cluster</h3>
+                <p class="body muted">Building a Python interface and a laptop-deployable version of UCSF DOCK3.8, so researchers can run and customize docking workflows without high-performance computing infrastructure.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="index">03</span>
+              <div>
+                <h3 class="heading-2xs">Putting co-folding to the test</h3>
+                <p class="body muted">Prospectively benchmarking protein–ligand co-folding methods across 557 Mac1–ligand complexes and three virtual screens, to see how much they help structure-based drug design.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK — text left, list right -->
+    <section id="work" class="section">
+      <div class="container split split--text-left">
+        <div class="copy sticky">
+          <p class="label reveal">Selected work</p>
+          <h2 class="heading-lg reveal">Papers &amp; patents.</h2>
+          <p class="body muted reveal">One paper from the PhD so far, and two antibody patents and a funded program from three years in biotech.</p>
+        </div>
+        <ul class="works">
+          <li class="reveal">
+            <a href="https://doi.org/10.7554/eLife.110475" target="_blank" rel="noopener">
+              <span class="year">2026</span>
+              <span class="title">Large scale prospective evaluation of co-folding across hundreds of Mac1 ligand complexes and three virtual screens</span>
+              <span class="venue">eLife 15:RP110475 · Co-first author</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a href="https://patents.google.com/patent/WO2024248532A1/en" target="_blank" rel="noopener">
+              <span class="year">2024</span>
+              <span class="title">Anti-CD200R1 and Use Thereof</span>
+              <span class="venue">Patent WO2024/248532 A1 · Co-inventor</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <a href="https://patents.google.com/patent/WO2024025343A1/en" target="_blank" rel="noopener">
+              <span class="year">2024</span>
+              <span class="title">Anti-ROR1 Antibody and Use Thereof</span>
+              <span class="venue">Patent WO2024/025343 A1 · Co-inventor</span>
+            </a>
+          </li>
+          <li class="reveal">
+            <div class="work-item">
+              <span class="year">2023</span>
+              <span class="title">AMB001, an immunosuppressive monoclonal antibody</span>
+              <span class="venue">US$1M from the Korea Drug Development Fund · Led the proposal</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ABOUT — portrait left, text right -->
+    <section id="about" class="section">
+      <div class="container split split--visual-left split--about">
+        <figure class="member reveal">
+          <img class="portrait" src="assets/portrait.jpg" alt="Portrait of Jongbin Kim" width="1333" height="2000" loading="lazy">
+          <figcaption>
+            <p class="role">PhD Candidate · UCSF</p>
+            <p class="heading-xs">Jongbin Kim</p>
+          </figcaption>
+        </figure>
+        <div class="copy">
+          <p class="label reveal">About</p>
+          <h2 class="heading-sm reveal">Chemical engineer by training, assay scientist for three years, now building computational tools for drug discovery.</h2>
+          <p class="body muted reveal">
+            I studied chemical engineering at Trinity Hall, Cambridge (B.A./M.Eng.,
+            First Class Honors), then spent three years at Aimed Bio in Seoul as
+            lead scientist on the assay development team, working on antibody
+            programs, a brain shuttle platform, and screening assays for
+            antibody–drug conjugates.
+          </p>
+          <p class="body muted reveal">
+            Since 2024 I've been a Ph.D. candidate in Pharmaceutical Sciences and
+            Pharmacogenomics at UCSF, in Brian Shoichet's lab.
+          </p>
+          <p class="body muted reveal">
+            Outside research, I'm open to consulting students. I've guided
+            applicants into top-rated universities, and I can help with
+            applications to Oxbridge and the Ivy League, as well as A Level, IB
+            and SAT preparation in Physics, Chemistry, Mathematics and Further
+            Mathematics. <a class="inline-link" href="#contact">Get in touch</a>
+            if that's you.
+          </p>
+          <p class="links reveal">
+            <a class="ghost" href="https://github.com/jongbin99" target="_blank" rel="noopener">GitHub</a>
+            <a class="ghost" href="https://www.linkedin.com/in/jongbin-kim-18843716a/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--contact">
+      <div class="container">
+        <p class="label reveal">Contact</p>
+        <h2 class="display reveal">Let's talk.</h2>
+        <div class="contact-row reveal">
+          <p class="body">Open to collaborations, questions about the work, and good conversations about docking and drug discovery.</p>
+          <a class="subheading link-amber" href="mailto:jongbinkim0213@gmail.com">jongbinkim0213@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <span>© 2026 Jongbin Kim</span>
+    <a class="ghost" href="#top">Back to top ↑</a>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
