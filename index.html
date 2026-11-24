@@ -16,7 +16,7 @@
 <body>
   <!-- Background: ViewDock pose scan rendered from ChimeraX (see tools/render_poses.py) -->
   <div class="bg-video" aria-hidden="true">
-    <video id="bg-video" muted loop playsinline preload="auto" poster="assets/poses.jpg">
+    <video id="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/poses.jpg">
       <source src="assets/poses.mp4" type="video/mp4">
     </video>
   </div>
@@ -60,13 +60,6 @@
           <a class="link-amber" href="#research">See the research <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <div class="container pose-readout">
-        <p class="caption">
-          <span class="pose-count"><span id="pose-idx">001</span> / <span id="pose-total">028</span></span>
-          <span class="pose-note">alpha2a agonists</span>
-        </p>
-        <button id="bg-toggle" class="ghost" type="button" aria-pressed="false">Pause</button>
-      </div>
     </section>
 
     <!-- RESEARCH — visual left, text right -->
@@ -97,7 +90,7 @@
               <span class="index">03</span>
               <div>
                 <h3 class="heading-2xs">Putting co-folding to the test</h3>
-                <p class="body muted">Prospectively benchmarking protein–ligand co-folding methods across 557 Mac1–ligand complexes and three virtual screens, to see how much they help structure-based drug design.</p>
+                <p class="body muted">Prospectively benchmarking protein–ligand co-folding methods across Mac1–ligand complexes and three virtual screens, to see how much they help structure-based drug design.</p>
               </div>
             </li>
           </ol>

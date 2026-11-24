@@ -301,36 +301,15 @@
     requestAnimationFrame(loop);
   }
 
-  /* ---------- Background video: pose readout, scroll dimming, pointer parallax ---------- */
+  /* ---------- Background video: scroll dimming, pointer parallax ---------- */
 
   const video = document.getElementById('bg-video');
   const wrap = video && video.parentElement;
   if (video) {
-    const idxEl = document.getElementById('pose-idx');
-    const totalEl = document.getElementById('pose-total');
-    const toggle = document.getElementById('bg-toggle');
-    let meta = null;
-    let last = -1;
-    let userPaused = REDUCED;
-
-    fetch('assets/poses.json').then((r) => r.json()).then((d) => {
-      meta = d;
-      totalEl.textContent = String(d.count).padStart(3, '0');
-    }).catch(() => {});
-
-    const setLabel = () => {
-      toggle.textContent = userPaused ? 'Play' : 'Pause';
-      toggle.setAttribute('aria-pressed', String(userPaused));
-    };
-    toggle.addEventListener('click', () => {
-      userPaused = !userPaused;
-      if (userPaused) video.pause(); else video.play().catch(() => {});
-      setLabel();
-    });
-    setLabel();
+    // Plays on load (the tag carries autoplay); only held back for prefers-reduced-motion.
+    if (REDUCED) video.pause(); else video.play().catch(() => {});
     // Servers without byte-range support can't seek, so the native loop may stall; restart by hand.
-    video.addEventListener('ended', () => { if (!userPaused) { video.load(); video.play().catch(() => {}); } });
-    if (!userPaused) video.play().catch(() => { userPaused = true; setLabel(); });
+    video.addEventListener('ended', () => { if (!REDUCED) { video.load(); video.play().catch(() => {}); } });
 
     // Bright in the hero, receding to a faint backdrop once you scroll into the text.
     const dim = () => {
@@ -342,13 +321,6 @@
 
     let px = 0, py = 0;
     const tick = () => {
-      if (meta) {
-        const i = Math.floor((video.currentTime * meta.fps) / meta.framesPerPose) % meta.count;
-        if (i !== last) {
-          last = i;
-          idxEl.textContent = String(i + 1).padStart(3, '0');
-        }
-      }
       if (!REDUCED) {
         px += (pointerN.x * -14 - px) * 0.05;
         py += (pointerN.y * -10 - py) * 0.05;
